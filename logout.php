@@ -7,3 +7,8 @@ $_SESSION = array();
 
 // Destroy the session.
 session_destroy();
+
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  header("location: index.php");
+  exit;
+}

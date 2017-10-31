@@ -92,17 +92,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           <h2 class="form-signin-heading">Login</h2>
           <p>Please fill in your credentials to login.</p>
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username:<sup>*</sup></label>
-                <input type="text" name="username"class="form-control" value="<?php echo $username; ?>">
+                <input type="text" name="username"class="form-control" value="<?php echo $username; ?>" placeholder="Username">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password:<sup>*</sup></label>
-                <input type="password" name="password" class="form-control">
+                <input type="password" name="password" class="form-control" placeholder="Password">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
             </div>
             <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
         </form>

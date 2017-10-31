@@ -6,6 +6,7 @@ body {
 
 .wrapper {
   text-align: center;
+  margin: 0 auto;
 	margin-top: 80px;
   margin-bottom: 80px;
 }
@@ -22,9 +23,6 @@ body {
 	  margin-bottom: 30px;
 	}
 
-	.checkbox {
-	  font-weight: normal;
-	}
 
 	.form-control {
 	  position: relative;
