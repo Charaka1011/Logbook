@@ -28,9 +28,9 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         <a class="navbar-brand" href="#">Team 21: Logbook</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="welcome.php">Home</a></li>
       </ul>
-      <button class="btn btn-danger navbar-btn">Add Log</button>
+      <a href = "addlog.php"> <button class="btn btn-danger navbar-btn">Add Log</button> </a>
       <ul class="nav navbar-nav navbar-right">
         <li><a href=""><?php echo date("Y/m/d") ?></a></li>
         <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
