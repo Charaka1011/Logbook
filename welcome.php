@@ -59,58 +59,19 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Vatanay</td>
-        <td>18/09/2017</td>
-        <td>I added salt to the app, someone ate my pie</td>
-        <td>
-        <a href="#" class="btn btn-danger btn-sm gliph">
-        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        </a>
-        <a href="#" class="btn btn-danger btn-sm gliph">
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        </a>
-        </td>
-      </tr>
-      <tr>
-        <td>Burak</td>
-        <td>05/10/2017</td>
-        <td>Nuclear Reactor buzzes loudly occassionally, check what 'Fire Alarm' means</td>
-        <td>
-        <a href="#" class="btn btn-danger btn-sm gliph">
-        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        </a>
-        <a href="#" class="btn btn-danger btn-sm gliph">
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        </a>
-        </td>
-      </tr>
-      <tr>
-        <td>Egemen</td>
-        <td>27/10/2017</td>
-        <td>I ate Vatanay's pie</td>
-        <td>
-        <a href="#" class="btn btn-danger btn-sm gliph">
-        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        </a>
-        <a href="#" class="btn btn-danger btn-sm gliph">
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        </a>
-        </td>
-      </tr>
-      <tr>
-        <td>Engin</td>
-        <td>30/10/2017</td>
-        <td>I lost the source code</td>
-        <td>
-        <a href="#" class="btn btn-danger btn-sm gliph">
-        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        </a>
-        <a href="#" class="btn btn-danger btn-sm gliph">
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        </a>
-        </td>
-      </tr>
+      <?php
+        require 'config.php';
+        $result = mysqli_query($link, "SELECT * FROM entries");
+        while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+          echo "<tr>";
+          echo "<td>". $row['username'] . "</td>";
+          echo "<td>". $row['date'] . "</td>";
+          echo "<td>". $row['text'] . "</td>";
+          echo '<td><a href="#" class="btn btn-danger btn-sm gliph"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> <a href="#" class="btn btn-danger btn-sm gliph"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>';
+          echo "</tr>";
+        }
+        mysqli_close($link);
+      ?>
     </tbody>
   </table>
 </div>

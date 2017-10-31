@@ -123,7 +123,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>" placeholder="Confirm Password">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
-                <input type="submit" class="btn btn-primary btn-block" value="Submit">
+                <input type="submit" class="btn btn-danger btn-block" value="Submit">
                 <input type="reset" class="btn btn-default btn-block" value="Reset">
             <p>Already have an account? <a href="index.php">Login here</a>.</p>
         </form>
