@@ -67,7 +67,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
           echo "<td>". $row['username'] . "</td>";
           echo "<td>". $row['date'] . "</td>";
           echo "<td>". $row['text'] . "</td>";
-          echo '<td><a href="#" class="btn btn-danger btn-sm gliph"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> <a href="#" class="btn btn-danger btn-sm gliph"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>';
+          echo '<td><button class="btn btn-danger btn-sm gliph"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button> <button onclick="deleteRow(' . $row['id']. ')" class="btn btn-danger btn-sm gliph"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>';
           echo "</tr>";
         }
         mysqli_close($link);
@@ -79,6 +79,14 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 
 <script src="js/search.js"></script>
 <script>
+function deleteRow(id) {
+  var ajaxurl = 'ajax.php',
+        data =  {'id': id};
+        $.post(ajaxurl, data, function (response) {
+            alert("Row Deleted");
+        });
+}
+
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("myTable");
