@@ -9,6 +9,34 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 }
 ?>
 
+<?php
+// Include config file
+require_once 'config.php';
+session_start();
+// Processing form data when form is submitted
+$username= $_SESSION['username'];
+$date= date("Y-m-d");
+$text=$_POST["text"];
+//Validate Text 
+if(empty(trim($text))){
+     $text_err = "Please enter text.";
+ }else{
+     // Prepare a select statement
+     $sql = "INSERT INTO entries (username,date,text) VALUES ('$username','$date','$text')";
+
+      mysqli_query($link,$sql);
+
+    if(mysqli_affected_rows($link) > 0){
+       header("location: welcome.php");
+    } else {
+      echo "<p>ERROR</p>";
+       echo mysqli_error ($link);
+    }
+  }
+   // Close connection
+   mysqli_close($link);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,15 +71,16 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   </div>
 
   <div class="container">
-<form action="/action_page.php">
+<form action="" method="post">
     <div class="form-group">
         <input type="text" name="username" class="form-control" placeholder="Username" value="<?php echo $_SESSION['username']; ?>" disabled>
     </div>
     <div class="form-group">
         <input type="text" name="date" class="form-control" value="<?php echo date("Y/m/d") ?>" disabled>
     </div>
-    <div class="form-group">
+    <div class="form-group <?php echo (!empty($text_err)) ? 'has-error' : ''; ?>">
       <textarea name="text" class="form-control" cols="56" rows ="15" ></textarea>
+      <span class="help-block"><?php echo $text_err; ?></span>
     </div>
     <div class="form-group">
         <input type="submit" class="btn btn-lg btn-danger btn-block" value="Submit">
