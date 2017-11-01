@@ -1,7 +1,6 @@
 <?php
 require 'config.php';
 $rowID = $_POST['id'];
-echo $rowID;
 function delete($id,$database){
     $sql = "DELETE FROM entries WHERE id=$id";
     if ($database->query($sql) === TRUE) {

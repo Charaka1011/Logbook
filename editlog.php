@@ -8,11 +8,25 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   exit;
 }
 ?>
+
+<?php
+  require 'config.php';
+  parse_str($_SERVER['QUERY_STRING']);
+  $sql = "SELECT * FROM entries WHERE id = $id LIMIT 1";
+
+  $result = mysqli_query($link, $sql);
+  $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+  $username = $row['username'];
+  $date = $row['date'];
+  $text = $row['text']; 
+
+  mysqli_close($link);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add log</title>
+    <title>Edit log</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/welcome.css">
@@ -38,22 +52,23 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     </div>
   </nav>
   <div class="page-header">
-      <h1>Add Log</h1>
+      <h1>Edit Log</h1>
   </div>
 
   <div class="container">
-<form action="addprocess.php" method="post">
+<form action="editprocess.php" method="post">
     <div class="form-group">
-        <input type="text" name="username" class="form-control" placeholder="Username" value="<?php echo $_SESSION['username']; ?>" disabled>
+        <input type="text" name="username" class="form-control" placeholder="Username" value="<?php echo $username ?>" disabled>
     </div>
     <div class="form-group">
-        <input type="text" name="date" class="form-control" value="<?php echo date("Y/m/d") ?>" disabled>
+        <input type="text" name="date" class="form-control" value="<?php echo $date ?>" disabled>
     </div>
-    <div class="form-group <?php echo (!empty($text_err)) ? 'has-error' : ''; ?>">
-      <textarea name="text" class="form-control" cols="56" rows ="15" ></textarea>
+    <div class="form-group">
+      <textarea name="text" class="form-control" cols="56" rows ="15" ><?php echo $text ?></textarea>
       <span class="help-block"></span>
     </div>
     <div class="form-group">
+        <input type="hidden" name="id" value="<?php echo $row['id']; ?>"/>
         <input type="submit" class="btn btn-lg btn-danger btn-block" value="Submit">
     </div>
     <div class="form-group">

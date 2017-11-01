@@ -45,7 +45,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 
     <div class="form-group pull-right">
       <input type="text" class="search form-control" placeholder="What you looking for?">
-  </div>
+    </div>
   <span class="counter pull-right"></span>
   <table class="table table-hover table-bordered results" id="myTable">
     <thead>
@@ -67,7 +67,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
           echo "<td>". $row['username'] . "</td>";
           echo "<td>". $row['date'] . "</td>";
           echo "<td>". $row['text'] . "</td>";
-          echo '<td><button class="btn btn-danger btn-sm gliph"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button> <button onclick="deleteRow(' . $row['id']. ')" class="btn btn-danger btn-sm gliph"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>';
+          echo '<td><a href = "editlog.php?id=' . $row['id'].'" class="btn btn-danger btn-sm gliph")"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> <button onclick="deleteRow(' . $row['id']. ',this)" class="btn btn-danger btn-sm gliph"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>';
           echo "</tr>";
         }
         mysqli_close($link);
@@ -76,13 +76,14 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   </table>
 </div>
 </body>
-
 <script src="js/search.js"></script>
 <script>
-function deleteRow(id) {
+function deleteRow(id,r) {
+  var i = r.parentNode.parentNode.rowIndex;
   var ajaxurl = 'ajax.php',
         data =  {'id': id};
         $.post(ajaxurl, data, function (response) {
+            document.getElementById("myTable").deleteRow(i);
             alert("Row Deleted");
         });
 }
