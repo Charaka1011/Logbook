@@ -12,7 +12,7 @@ if ($link->connect_error) {
 
 $sql = "UPDATE entries SET text='$text' WHERE id=$id";
 
-if ($link->query($sql) === TRUE) {
+if ($link->query($sql) === TRUE) { 
     header("location: welcome.php");
 } else {
     echo "Error updating record: " . $link->error;

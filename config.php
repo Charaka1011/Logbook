@@ -1,6 +1,13 @@
 <?php
 /* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
+
+// Now we are not dependent on application location
+define('ROOT',dirname(__FILE__));
+
+// an abstract SQL class
+include ROOT . '/lib/SQL.php';
+
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'root');
