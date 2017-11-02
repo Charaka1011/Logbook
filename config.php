@@ -2,13 +2,9 @@
 /* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'root');
-define('DB_NAME', 'logbook');
 
 /* Attempt to connect to MySQL database */
-$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+$link=mysqli_init(); mysqli_ssl_set($link, NULL, NULL, {ca-cert filename}, NULL, NULL); mysqli_real_connect($link, "team21log.mysql.database.azure.com", "Charaka@team21log", {"2017Team21"}, {"logbook"}, 3306);
 
 // Check connection
 if($link === false){
